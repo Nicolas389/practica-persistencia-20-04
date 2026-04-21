@@ -2,6 +2,7 @@ const app = require('express')() /* se puede hacer asi o guardando express en un
 const PORT = 3000
 const materiasRoute = require('./routes/materias.route')
 const profesoresRoute = require('./routes/profesores.route')
+const {sequelize} = require('./models')
 
 app.use(materiasRoute)
 app.use(profesoresRoute)
@@ -11,6 +12,7 @@ app.listen(PORT, (err) => {
         console.error(err.message)
         process.exit(1)
     }
+    sequelize.sync({force:true})
     console.log(`Aplicacion escuchando en puerto ${PORT}`)
 })
 
